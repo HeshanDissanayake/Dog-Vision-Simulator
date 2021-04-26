@@ -1,3 +1,27 @@
+import cv2
+import numpy as np
+# class Stitcher:
+# 	def __init__(self):
+# 		# determine if we are using OpenCV v3.X and initialize the
+# 		# cached homography matrix
+# 		self.isv3 = imutils.is_cv3()
+# 		self.cachedH = None
+
+
+def detectAndDescribe(self, image):
+		gray = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
+		# return a tuple of keypoints and features
+
+		descriptor = cv2.xfeatures2d.SIFT_create()
+		(kps, features) = descriptor.detectAndCompute(image, None)
+
+		kps = np.float32([kp.pt for kp in kps])
+
+		return (kps, features)
+
+
+
+
 def stitch(self, images, ratio=0.75, reprojThresh=4.0):
 		# unpack the images
 		(imageB, imageA) = images
