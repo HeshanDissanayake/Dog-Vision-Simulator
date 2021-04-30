@@ -1,10 +1,54 @@
+<!-- <div class="col-lg-8  offset-lg-2"> -->
+
+
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Panaroma view</title>
+    <link rel="stylesheet" href="./style.css">
+</head>
+
+<style>
+    .view {
+        position: absolute;
+        top: 10vh;
+        height: 50vh;
+        width: 100%;
+    }
+
+    body {
+        margin: 0;
+        background: rgb(29, 29, 28);
+    }
+
+    .controls{
+        position: absolute;
+        top:87vh;
+        height:10vh;
+        width: 98vw;
+        left: 50vw;
+        transform: translate(-50%, 0%);
+        border: 3px solid rgb(71, 69, 69);
+        border-radius: 10px;
+    }
+</style>
+
 <body>
     <div class="container">
         <div class="row">
-            <div class="col-lg-8  offset-lg-2">
-                <h3 class="mt-5">Live Streaming</h3>
+            <div class="view">
                 <img src="{{ url_for('video_feed') }}" width="100%">
             </div>
         </div>
+        
     </div>
-    </body>
+
+    <div class = "controls">
+
+    </div>
+</body>
+
+</html>

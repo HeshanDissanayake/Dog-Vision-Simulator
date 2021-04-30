@@ -1,0 +1,11 @@
+.view{
+    position:absolute;
+    top:20%;
+    height:50vh;
+    width:100%;
+}
+
+body{
+    margin: 0;
+    background:rgb(29, 29, 28);
+}

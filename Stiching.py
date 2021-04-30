@@ -1,9 +1,8 @@
 import cv2
 import numpy as np
 import ipcamera
-
 class Sticher:
-	def init(self):
+	def __init__(self):
 		self.cachedH = None
 
 	def detectAndDescribe(self, image):
@@ -52,10 +51,10 @@ class Sticher:
 		# apply keypoint matching to construct it
 		if self.cachedH is None:
 			# detect keypoints and extract
-			(kpsA, featuresA) = detectAndDescribe(imageA)
-			(kpsB, featuresB) = detectAndDescribe(imageB)
+			(kpsA, featuresA) = self.detectAndDescribe(imageA)
+			(kpsB, featuresB) = self.detectAndDescribe(imageB)
 			# match features between the two images
-			M = matchKeypoints(kpsA, kpsB,
+			M = self.matchKeypoints(kpsA, kpsB,
 				featuresA, featuresB, ratio, reprojThresh)
 			# if the match is None, then there aren't enough matched
 			# keypoints to create a panorama
@@ -74,31 +73,4 @@ class Sticher:
 		return result
 	
 
-img1 = cv2.imread("/home/heshds/fiverr/panaroma_video/photos/img1.jpeg")
-img2 = cv2.imread("/home/heshds/fiverr/panaroma_video/photos/img2.jpeg")
 
-ip1 = "http://192.168.1.101:8081/video"
-ip2 = "http://192.168.1.103:8080/video"
-
-cam1 = ipcamera.IpCamera(ip1)
-cam2 = ipcamera.IpCamera(ip2)
-
-cam1.start()
-cam2.start()
-
-images = [img1, img2]
-
-
-
-while True:
-	if cam1.available and cam2.available:
-		images = [cam2.frame, cam1.frame]
-		img = stitch(images)
-		img = cv2.resize(img, (cam1.frame.shape[1], int(cam1.frame.shape[0]/2)))
-	
-		cv2.imshow("lol2", img)
-		key = cv2.waitKey(1)
-		if key == 32:
-			cachedH = None
-		if key == 27:
-			break 
